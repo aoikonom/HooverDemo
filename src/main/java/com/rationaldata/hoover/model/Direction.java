@@ -1,5 +1,8 @@
 package com.rationaldata.hoover.model;
 
+import com.rationaldata.hoover.exceptions.ExceptionCodeEnum;
+import com.rationaldata.hoover.exceptions.InvalidRequestException;
+
 public enum Direction {
     North('N', new Step(0, 1)),
     South('S', new Step(0, -1)),
@@ -17,7 +20,7 @@ public enum Direction {
         for (Direction dir : values())
             if (dir.name == c)
                 return dir;
-        return null;
+        throw new InvalidRequestException(ExceptionCodeEnum.INVALID_INSTRUCTION);
     }
 
     public char getName() {

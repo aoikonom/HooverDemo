@@ -1,7 +1,7 @@
 package com.rationaldata.hoover.api;
 
-import com.rationaldata.hoover.model.HooverMoveInstructionsJson;
-import com.rationaldata.hoover.model.HooverMoveOutput;
+import com.rationaldata.hoover.model.HooverMoveInstructionsRequest;
+import com.rationaldata.hoover.model.HooverMoveResponse;
 import com.rationaldata.hoover.service.HooverMoveService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -21,7 +21,7 @@ public class HooverMoveApi {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/move")
-    public HooverMoveOutput move(HooverMoveInstructionsJson instructions) {
+    public HooverMoveResponse move(HooverMoveInstructionsRequest instructions) {
         return service.move(instructions);
     }
 

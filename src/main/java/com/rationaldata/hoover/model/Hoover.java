@@ -32,6 +32,7 @@ public class Hoover {
     }
 
     public void executeMoveInstructions(String instructions) {
+        setPosition(position);
         for (char c : instructions.toCharArray()) {
             Direction direction = Direction.fromChar(c);
             if (direction != null) {

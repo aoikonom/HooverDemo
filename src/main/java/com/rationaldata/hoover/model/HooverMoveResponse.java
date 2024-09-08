@@ -2,11 +2,11 @@ package com.rationaldata.hoover.model;
 
 import java.util.List;
 
-public class HooverMoveOutput {
+public class HooverMoveResponse {
     private List<Integer> coords;
     private int patches;
 
-    public HooverMoveOutput(List<Integer> coords, int patches) {
+    public HooverMoveResponse(List<Integer> coords, int patches) {
         this.coords = coords;
         this.patches = patches;
     }

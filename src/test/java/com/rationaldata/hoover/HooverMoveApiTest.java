@@ -7,7 +7,6 @@ import java.util.List;
 
 import com.rationaldata.hoover.exceptions.ExceptionCodeEnum;
 import com.rationaldata.hoover.exceptions.ExceptionResponse;
-import com.rationaldata.hoover.model.HooverMoveInstructions;
 import com.rationaldata.hoover.model.HooverMoveInstructionsRequest;
 import com.rationaldata.hoover.model.HooverMoveResponse;
 import io.restassured.http.ContentType;
@@ -59,7 +58,7 @@ public class HooverMoveApiTest {
     public void testInvalidInitialPosition() {
         HooverMoveInstructionsRequest request = new HooverMoveInstructionsRequest(List.of(5,4),
                 List.of(1, 4), List.of(new int[]{1, 0}, new int[]{2, 2}, new int[]{2, 3}), "NNESEESWNWW");
-        ExceptionResponse expectedResponse = new ExceptionResponse(ExceptionCodeEnum.UNKNWON_INSTRUCTION);
+        ExceptionResponse expectedResponse = new ExceptionResponse(ExceptionCodeEnum.INVALID_INITIAL_POSITION);
         invalidTest(request, expectedResponse, HttpStatus.SC_BAD_REQUEST);
     }
 
@@ -67,7 +66,7 @@ public class HooverMoveApiTest {
     public void testInvalidInstruction() {
         HooverMoveInstructionsRequest request = new HooverMoveInstructionsRequest(List.of(5,4),
                 List.of(1, 3), List.of(new int[]{1, 0}, new int[]{2, 2}, new int[]{2, 3}), "NEA");
-        ExceptionResponse expectedResponse = new ExceptionResponse(ExceptionCodeEnum.INVALID_INSTRUCTION);
+        ExceptionResponse expectedResponse = new ExceptionResponse(ExceptionCodeEnum.UNKNWON_INSTRUCTION);
         invalidTest(request, expectedResponse, HttpStatus.SC_BAD_REQUEST);
     }
 

@@ -20,7 +20,7 @@ public enum Direction {
         for (Direction dir : values())
             if (dir.name == c)
                 return dir;
-        throw new InvalidRequestException(ExceptionCodeEnum.INVALID_INSTRUCTION);
+        throw new InvalidRequestException(ExceptionCodeEnum.UNKNWON_INSTRUCTION);
     }
 
     public char getName() {

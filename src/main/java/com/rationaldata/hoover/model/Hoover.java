@@ -1,5 +1,8 @@
 package com.rationaldata.hoover.model;
 
+import com.rationaldata.hoover.exceptions.ExceptionCodeEnum;
+import com.rationaldata.hoover.exceptions.InvalidRequestException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -32,6 +35,8 @@ public class Hoover {
     }
 
     public void executeMoveInstructions(String instructions) {
+        if (positionValidator != null && !positionValidator.isPositionValid(position))
+            throw new InvalidRequestException(ExceptionCodeEnum.INVALID_INITIAL_POSITION);
         setPosition(position);
         for (char c : instructions.toCharArray()) {
             Direction direction = Direction.fromChar(c);

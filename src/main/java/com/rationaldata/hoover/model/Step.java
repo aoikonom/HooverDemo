@@ -1,4 +1,4 @@
 package com.rationaldata.hoover.model;
 
-public record Step(int difRow,int difColumn) {
+public record Step(int difColumn,int difRow) {
 }

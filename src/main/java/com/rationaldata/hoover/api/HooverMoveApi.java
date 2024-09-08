@@ -25,9 +25,4 @@ public class HooverMoveApi {
         return service.move(instructions);
     }
 
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
-        return "hello";
-    }
 }

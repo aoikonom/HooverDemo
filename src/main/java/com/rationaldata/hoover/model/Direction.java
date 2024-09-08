@@ -1,10 +1,10 @@
 package com.rationaldata.hoover.model;
 
 public enum Direction {
-    North('N', new Step(1, 0)),
-    South('S', new Step(-1, 0)),
-    East('E', new Step(0, 1)),
-    West('W', new Step(0, -1));
+    North('N', new Step(0, 1)),
+    South('S', new Step(0, -1)),
+    East('E', new Step(1, 0)),
+    West('W', new Step(-1, 0));
     private char name;
     private Step step;
 

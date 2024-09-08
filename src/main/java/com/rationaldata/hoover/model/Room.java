@@ -3,10 +3,10 @@ package com.rationaldata.hoover.model;
 import java.util.Set;
 
 public class Room implements PositionValidator {
-    private int rows;
     private int columns;
+    private int rows;
 
-    public Room(int rows, int columns) {
+    public Room(int columns,int rows) {
         this.rows = rows;
         this.columns = columns;
     }

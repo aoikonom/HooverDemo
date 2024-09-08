@@ -23,13 +23,13 @@ public class HooverMoveService {
         if (request.instructions() == null)
             throw new InvalidRequestException(ExceptionCodeEnum.INSTRUCTIONS_REQUIRED);
         if (request.patches() == null)
-            throw new InvalidRequestException(ExceptionCodeEnum.PATCHES_REQUIRED);
+            throw new InvalidRequestException(ExceptionCodeEnum.PATCHES_INVALID);
     }
 
     public HooverMoveResponse move(HooverMoveInstructionsRequest request) {
         validate(request);
         HooverMoveInstructions instructions = HooverMoveInstructions.fromJsonInstructions(request);
-        Room room = new Room(instructions.roomSize().row(), instructions.roomSize().column());
+        Room room = new Room(instructions.roomSize().column(), instructions.roomSize().row());
         Dirt dirt = new Dirt(instructions.dirt());
         Hoover hoover = new Hoover(instructions.initialPosition(), room);
         hoover.addPositionListener(dirt);

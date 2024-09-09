@@ -61,9 +61,9 @@ the provided dimensions with the "roomSize" parameter
 
 The json input must follow the following requirements or an error will be returned
 - all coordinates provided as an array of integers should consist of exactly 2 integers
-- roomSize must be present and not null
+- roomSize must be present and not null, consisting of 2 integers > 0
 - coords must be present, not null and inside the room
-- patches must be present and not null. It can be an empty array though
+- patches must be present and not null. It can be an empty array though. Patch coordinates can be out of the room in which case they are ignored
 - instructions must be present and not null. It can be an empty string though. All characters should
 be one of N, S, E, W
 
@@ -91,3 +91,9 @@ will produce this result
     "errorCode": "INVALID_INITIAL_POSITION"
 }
 ```
+
+## Test coverage
+
+Test coverage was checked with IntelliJ IDEA. <br>
+The results are 100% class, > 80% method, > 80% lines. <br>
+Html report results are included in Github, so that they can be easily checked and can be accessed from /htmlReport/index.html

@@ -59,10 +59,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    73.7%
+    75%
   </span>
   <span class="absValue">
-    (14/19)
+    (15/20)
   </span>
 </td>
 </tr>
@@ -94,18 +94,19 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;            throw new InvalidRequestException(ExceptionCodeEnum.REQUEST_NULL);</b>
 <b class="fc">&nbsp;        if (request.coords() == null || request.coords().size() != 2)</b>
 <b class="nc">&nbsp;            throw new InvalidRequestException(ExceptionCodeEnum.COORDS_INVALID);</b>
-<b class="fc">&nbsp;        if (request.roomSize() == null || request.roomSize().size() != 2)</b>
+<b class="fc">&nbsp;        if (request.roomSize() == null || request.roomSize().size() != 2 ||</b>
+<b class="fc">&nbsp;                request.roomSize().stream().anyMatch(p -&gt; p &lt; 0))</b>
 <b class="nc">&nbsp;            throw new InvalidRequestException(ExceptionCodeEnum.ROOM_SIZE_INVALID);</b>
 <b class="fc">&nbsp;        if (request.instructions() == null)</b>
 <b class="nc">&nbsp;            throw new InvalidRequestException(ExceptionCodeEnum.INSTRUCTIONS_REQUIRED);</b>
 <b class="fc">&nbsp;        if (request.patches() == null)</b>
-<b class="nc">&nbsp;            throw new InvalidRequestException(ExceptionCodeEnum.PATCHES_REQUIRED);</b>
+<b class="nc">&nbsp;            throw new InvalidRequestException(ExceptionCodeEnum.PATCHES_INVALID);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public HooverMoveResponse move(HooverMoveInstructionsRequest request) {
 <b class="fc">&nbsp;        validate(request);</b>
 <b class="fc">&nbsp;        HooverMoveInstructions instructions = HooverMoveInstructions.fromJsonInstructions(request);</b>
-<b class="fc">&nbsp;        Room room = new Room(instructions.roomSize().row(), instructions.roomSize().column());</b>
+<b class="fc">&nbsp;        Room room = new Room(instructions.roomSize().column(), instructions.roomSize().row());</b>
 <b class="fc">&nbsp;        Dirt dirt = new Dirt(instructions.dirt());</b>
 <b class="fc">&nbsp;        Hoover hoover = new Hoover(instructions.initialPosition(), room);</b>
 <b class="fc">&nbsp;        hoover.addPositionListener(dirt);</b>
@@ -138,7 +139,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-08 17:08</div>
+    <div style="float:right;">generated on 2024-09-09 17:44</div>
 </div>
 </body>
 </html>

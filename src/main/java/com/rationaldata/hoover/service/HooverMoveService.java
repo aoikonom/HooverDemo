@@ -18,7 +18,8 @@ public class HooverMoveService {
             throw new InvalidRequestException(ExceptionCodeEnum.REQUEST_NULL);
         if (request.coords() == null || request.coords().size() != 2)
             throw new InvalidRequestException(ExceptionCodeEnum.COORDS_INVALID);
-        if (request.roomSize() == null || request.roomSize().size() != 2)
+        if (request.roomSize() == null || request.roomSize().size() != 2 ||
+                request.roomSize().stream().anyMatch(p -> p < 0))
             throw new InvalidRequestException(ExceptionCodeEnum.ROOM_SIZE_INVALID);
         if (request.instructions() == null)
             throw new InvalidRequestException(ExceptionCodeEnum.INSTRUCTIONS_REQUIRED);

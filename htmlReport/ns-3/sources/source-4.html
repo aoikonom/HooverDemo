@@ -40,18 +40,18 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">InvalidRequestExceptionMapper</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/2)
+    (2/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/2)
+    (2/2)
   </span>
 </td>
 </tr>
@@ -65,18 +65,18 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/2)
+    (2/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/2)
+    (2/2)
   </span>
 </td>
 </tr>
@@ -90,16 +90,15 @@ Current scope:     <a href="../../index.html">all classes</a>
 <code class="sourceCode" id="sourceCode">&nbsp;package com.rationaldata.hoover.exceptions;
 &nbsp;
 &nbsp;import jakarta.ws.rs.core.Response;
-&nbsp;import jakarta.ws.rs.ext.ExceptionMapper;
 &nbsp;import jakarta.ws.rs.ext.Provider;
 &nbsp;import org.jboss.resteasy.reactive.RestResponse;
 &nbsp;import org.jboss.resteasy.reactive.server.ServerExceptionMapper;
 &nbsp;
 &nbsp;@Provider
-<b class="nc">&nbsp;public class InvalidRequestExceptionMapper {</b>
+<b class="fc">&nbsp;public class InvalidRequestExceptionMapper {</b>
 &nbsp;    @ServerExceptionMapper
 &nbsp;    public RestResponse&lt;ExceptionResponse&gt; mapException(InvalidRequestException ex) {
-<b class="nc">&nbsp;        return RestResponse.status(Response.Status.BAD_REQUEST, new ExceptionResponse(ex.getErrorCode()));</b>
+<b class="fc">&nbsp;        return RestResponse.status(Response.Status.BAD_REQUEST, new ExceptionResponse(ex.getErrorCode()));</b>
 &nbsp;    }
 &nbsp;}
 </code>
@@ -125,7 +124,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-08 17:08</div>
+    <div style="float:right;">generated on 2024-09-09 17:44</div>
 </div>
 </body>
 </html>

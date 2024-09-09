@@ -59,10 +59,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    85.7%
+    92.9%
   </span>
   <span class="absValue">
-    (12/14)
+    (13/14)
   </span>
 </td>
 </tr>
@@ -76,11 +76,14 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package com.rationaldata.hoover.model;
 &nbsp;
+&nbsp;import com.rationaldata.hoover.exceptions.ExceptionCodeEnum;
+&nbsp;import com.rationaldata.hoover.exceptions.InvalidRequestException;
+&nbsp;
 <b class="fc">&nbsp;public enum Direction {</b>
-<b class="fc">&nbsp;    North(&#39;N&#39;, new Step(1, 0)),</b>
-<b class="fc">&nbsp;    South(&#39;S&#39;, new Step(-1, 0)),</b>
-<b class="fc">&nbsp;    East(&#39;E&#39;, new Step(0, 1)),</b>
-<b class="fc">&nbsp;    West(&#39;W&#39;, new Step(0, -1));</b>
+<b class="fc">&nbsp;    North(&#39;N&#39;, new Step(0, 1)),</b>
+<b class="fc">&nbsp;    South(&#39;S&#39;, new Step(0, -1)),</b>
+<b class="fc">&nbsp;    East(&#39;E&#39;, new Step(1, 0)),</b>
+<b class="fc">&nbsp;    West(&#39;W&#39;, new Step(-1, 0));</b>
 &nbsp;    private char name;
 &nbsp;    private Step step;
 &nbsp;
@@ -93,7 +96,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        for (Direction dir : values())</b>
 <b class="fc">&nbsp;            if (dir.name == c)</b>
 <b class="fc">&nbsp;                return dir;</b>
-<b class="nc">&nbsp;        return null;</b>
+<b class="fc">&nbsp;        throw new InvalidRequestException(ExceptionCodeEnum.UNKNWON_INSTRUCTION);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public char getName() {
@@ -127,7 +130,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-08 17:08</div>
+    <div style="float:right;">generated on 2024-09-09 17:44</div>
 </div>
 </body>
 </html>

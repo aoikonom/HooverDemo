@@ -59,10 +59,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    80%
+    81.5%
   </span>
   <span class="absValue">
-    (20/25)
+    (22/27)
   </span>
 </td>
 </tr>
@@ -75,6 +75,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package com.rationaldata.hoover.model;
+&nbsp;
+&nbsp;import com.rationaldata.hoover.exceptions.ExceptionCodeEnum;
+&nbsp;import com.rationaldata.hoover.exceptions.InvalidRequestException;
 &nbsp;
 &nbsp;import java.util.ArrayList;
 &nbsp;import java.util.List;
@@ -108,6 +111,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    }
 &nbsp;
 &nbsp;    public void executeMoveInstructions(String instructions) {
+<b class="fc">&nbsp;        if (positionValidator != null &amp;&amp; !positionValidator.isPositionValid(position))</b>
+<b class="fc">&nbsp;            throw new InvalidRequestException(ExceptionCodeEnum.INVALID_INITIAL_POSITION);</b>
 <b class="fc">&nbsp;        setPosition(position);</b>
 <b class="fc">&nbsp;        for (char c : instructions.toCharArray()) {</b>
 <b class="fc">&nbsp;            Direction direction = Direction.fromChar(c);</b>
@@ -159,7 +164,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-08 17:08</div>
+    <div style="float:right;">generated on 2024-09-09 17:44</div>
 </div>
 </body>
 </html>

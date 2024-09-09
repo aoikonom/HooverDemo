@@ -1,0 +1,144 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > HooverMoveService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.rationaldata.hoover.service</a>
+</div>
+
+<h1>Coverage Summary for Class: HooverMoveService (com.rationaldata.hoover.service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HooverMoveService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    73.7%
+  </span>
+  <span class="absValue">
+    (14/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.rationaldata.hoover.service;
+&nbsp;
+&nbsp;import com.rationaldata.hoover.exceptions.ExceptionCodeEnum;
+&nbsp;import com.rationaldata.hoover.exceptions.InvalidRequestException;
+&nbsp;import com.rationaldata.hoover.model.Dirt;
+&nbsp;import com.rationaldata.hoover.model.Hoover;
+&nbsp;import com.rationaldata.hoover.model.HooverMoveInstructions;
+&nbsp;import com.rationaldata.hoover.model.HooverMoveInstructionsRequest;
+&nbsp;import com.rationaldata.hoover.model.HooverMoveResponse;
+&nbsp;import com.rationaldata.hoover.model.Room;
+&nbsp;import jakarta.enterprise.context.ApplicationScoped;
+&nbsp;
+&nbsp;@ApplicationScoped
+<b class="fc">&nbsp;public class HooverMoveService {</b>
+&nbsp;
+&nbsp;    private void validate(HooverMoveInstructionsRequest request) {
+<b class="fc">&nbsp;        if (request == null)</b>
+<b class="nc">&nbsp;            throw new InvalidRequestException(ExceptionCodeEnum.REQUEST_NULL);</b>
+<b class="fc">&nbsp;        if (request.coords() == null || request.coords().size() != 2)</b>
+<b class="nc">&nbsp;            throw new InvalidRequestException(ExceptionCodeEnum.COORDS_INVALID);</b>
+<b class="fc">&nbsp;        if (request.roomSize() == null || request.roomSize().size() != 2)</b>
+<b class="nc">&nbsp;            throw new InvalidRequestException(ExceptionCodeEnum.ROOM_SIZE_INVALID);</b>
+<b class="fc">&nbsp;        if (request.instructions() == null)</b>
+<b class="nc">&nbsp;            throw new InvalidRequestException(ExceptionCodeEnum.INSTRUCTIONS_REQUIRED);</b>
+<b class="fc">&nbsp;        if (request.patches() == null)</b>
+<b class="nc">&nbsp;            throw new InvalidRequestException(ExceptionCodeEnum.PATCHES_REQUIRED);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public HooverMoveResponse move(HooverMoveInstructionsRequest request) {
+<b class="fc">&nbsp;        validate(request);</b>
+<b class="fc">&nbsp;        HooverMoveInstructions instructions = HooverMoveInstructions.fromJsonInstructions(request);</b>
+<b class="fc">&nbsp;        Room room = new Room(instructions.roomSize().row(), instructions.roomSize().column());</b>
+<b class="fc">&nbsp;        Dirt dirt = new Dirt(instructions.dirt());</b>
+<b class="fc">&nbsp;        Hoover hoover = new Hoover(instructions.initialPosition(), room);</b>
+<b class="fc">&nbsp;        hoover.addPositionListener(dirt);</b>
+&nbsp;
+<b class="fc">&nbsp;        hoover.executeMoveInstructions(instructions.instructions());</b>
+&nbsp;
+<b class="fc">&nbsp;        return new HooverMoveResponse(hoover.getPosition().toIntList(), dirt.getCleanedDirt());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-09-08 17:08</div>
+</div>
+</body>
+</html>

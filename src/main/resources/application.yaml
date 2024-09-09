@@ -2,3 +2,7 @@ quarkus:
   http:
     port: 3267
     host: localhost
+  package:
+    jar:
+      type: uber-jar
+      add-runner-suffix: false

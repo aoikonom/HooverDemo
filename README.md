@@ -1,79 +1,93 @@
-# Getting started with Quarkus
+# Hoover Demo
 
-This is a minimal CRUD service exposing a couple of endpoints over REST.
+This is an assignment for RationalData.
+<p>Solution was implemented with Quarkus 3.14.2 and Java 17.
+<p>It was built on Windows and tested on Windows and Linux
 
-Under the hood, this demo uses:
+## How to execute
+- Download the executable folder
+- From the command line go to the downloaded folder where hoover-demo-1.0.0.jar resides
+- From the command line run **java -jar hoover-demo-1.0.0.jar**
 
-- RESTEasy to expose the REST endpoints
-- REST-assured and JUnit 5 for endpoint testing
+In order to test the service send an http PUSH request to http://localhost:3267/api/v1/hoover/move with response body a json like:
 
-## Requirements
+```
+{
+    "roomSize": [5, 5],
+    "coords": [1, 2],
+    "patches": [
+        [1, 0],
+        [2, 2],
+        [2, 3]
+    ],
+    "instructions": "NNESEESWNWW"
+}
+```
 
-To compile and run this demo you will need:
+Using curl you can use the following from linux terminal
 
-- JDK 17+
-- GraalVM
+> curl --header "Content-Type: application/json"   --request POST   --data '{
+> "roomSize": [5, 5],
+> "coords": [1, 2],
+> "patches": [
+> [1, 0],
+> [2, 2],
+> [2, 3]
+> ],
+> "instructions": "NNESEESWNWW"
+> }'   http://localhost:3267/api/v1/hoover/move
 
-### Configuring GraalVM and JDK 17+
+## How to run the tests
 
-Make sure that both the `GRAALVM_HOME` and `JAVA_HOME` environment variables have
-been set, and that a JDK 17+ `java` command is on the path.
+To run the tests download the project and from the root folder run the following 
+command from the command line
 
-See the [Building a Native Executable guide](https://quarkus.io/guides/building-native-image-guide)
-for help setting up your environment.
+> mvn test
 
-## Building the application
 
-Launch the Maven build on the checked out sources of this demo:
+## Assumptions
 
-> ./mvnw package
+The following assumptions have been made
+- All coordinates are in (X,Y) or (column,row) format. So, first number is the column and the second the row
+- The room extends from (0, 0) to (X - 1, Y - 1) where (X,Y) are
+the provided dimensions with the "roomSize" parameter
+- Directions work like looking on a map, so 
+  - North means from bottop to top (increasing Y),
+  - South from top to bottom (decreasing Y), 
+  - East from left to right and 
+  - West from right to left (Increasing X) and
 
-### Live coding with Quarkus
+### Validation
 
-The Maven Quarkus plugin provides a development mode that supports
-live coding. To try this out:
+The json input must follow the following requirements or an error will be returned
+- all coordinates provided as an array of integers should consist of exactly 2 integers
+- roomSize must be present and not null
+- coords must be present, not null and inside the room
+- patches must be present and not null. It can be an empty array though
+- instructions must be present and not null. It can be an empty string though. All characters should
+be one of N, S, E, W
 
-> ./mvnw quarkus:dev
+If the requirements are not met or another error occurs a json containing an error 
+code is returned. This is so that a possible frontend could map this error code to
+a message supporting internationalization. 
 
-This command will leave Quarkus running in the foreground listening on port 8080.
+For example this input 
+```
+{
+    "roomSize": [5, 5],
+    "coords": [1, 5],
+    "patches": [
+        [1, 0],
+        [2, 2],
+        [2, 3]
+    ],
+    "instructions": "NNESEESWNWW"
+}
+```
 
-1. Visit the default endpoint: [http://127.0.0.1:8080](http://127.0.0.1:8080).
-    - Make a simple change to [src/main/resources/META-INF/resources/index.html](src/main/resources/META-INF/resources/index.html) file.
-    - Refresh the browser to see the updated page.
-2. Visit the `/hello` endpoint: [http://127.0.0.1:8080/hello](http://127.0.0.1:8080/hello)
-    - Update the response in [src/main/java/org/acme/quickstart/GreetingResource.java](src/main/java/org/acme/quickstart/GreetingResource.java). Replace `hello` with `hello there` in the `hello()` method.
-    - Refresh the browser. You should now see `hello there`.
-    - Undo the change, so the method returns `hello` again.
-    - Refresh the browser. You should now see `hello`.
-
-### Run Quarkus in JVM mode
-
-When you're done iterating in developer mode, you can run the application as a
-conventional jar file.
-
-First compile it:
-
-> ./mvnw package
-
-Then run it:
-
-> java -jar ./target/quarkus-app/quarkus-run.jar
-
-Have a look at how fast it boots, or measure the total native memory consumption.
-
-### Run Quarkus as a native executable
-
-You can also create a native executable from this application without making any
-source code changes. A native executable removes the dependency on the JVM:
-everything needed to run the application on the target platform is included in
-the executable, allowing the application to run with minimal resource overhead.
-
-Compiling a native executable takes a bit longer, as GraalVM performs additional
-steps to remove unnecessary codepaths. Use the  `native` profile to compile a
-native executable:
-
-> ./mvnw package -Dnative
-
-After getting a cup of coffee, you'll be able to run this executable directly:
-
-> ./target/getting-started-1.0.0-SNAPSHOT-runner
+will produce this result
+```
+{
+    "errorCode": "INVALID_INITIAL_POSITION"
+}
+```
